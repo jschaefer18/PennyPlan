@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PennyPlan</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Chart.js (simple + clean) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">PP</div>
+      <div>
+        <h1>PennyPlan</h1>
+        <p class="subtle">Clean, analytical tracking</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <label class="field">
+        <span>Month</span>
+        <select id="monthSelect">
+        <option value="2026-01" selected>January 2026</option>
+        <option value="2026-02">February 2026</option>
+        <option value="2026-03">March 2026</option>
+        <option value="2026-04">April 2026</option>
+        <option value="2026-05">May 2026</option>
+        <option value="2026-06">June 2026</option>
+        <option value="2026-07">July 2026</option>
+        <option value="2026-08">August 2026</option>
+        <option value="2026-09">September 2026</option>
+        <option value="2026-10">October 2026</option>
+        <option value="2026-11">November 2026</option>
+        <option value="2026-12">December 2026</option>
+        </select>
+      </label>
+
+      <button class="btn" id="addTxnBtn" type="button">+ Add Transaction</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- KPI cards -->
+    <section class="kpis">
+      <div class="card kpi">
+        <div class="kpi-label">Income</div>
+        <div class="kpi-value" id="kpiIncome">$0</div>
+        <div class="kpi-foot subtle">This month</div>
+      </div>
+
+      <div class="card kpi">
+        <div class="kpi-label">Spending</div>
+        <div class="kpi-value" id="kpiSpending">$0</div>
+        <div class="kpi-foot subtle">This month</div>
+      </div>
+
+      <div class="card kpi">
+        <div class="kpi-label">Net</div>
+        <div class="kpi-value" id="kpiNet">$0</div>
+        <div class="kpi-foot subtle">Income − Spending</div>
+      </div>
+
+      <div class="card kpi">
+        <div class="kpi-label">Savings Rate</div>
+        <div class="kpi-value" id="kpiSavingsRate">0%</div>
+        <div class="kpi-foot subtle">Net / Income</div>
+      </div>
+    </section>
+
+    <!-- Charts -->
+    <section class="grid">
+      <article class="card panel">
+        <div class="panel-head">
+          <h2>Daily Spend Trend</h2>
+          <p class="subtle">Hover points to see exact values</p>
+        </div>
+        <div class="panel-body">
+          <canvas id="trendChart"></canvas>
+        </div>
+      </article>
+
+      <article class="card panel">
+        <div class="panel-head">
+          <h2>Spending by Category</h2>
+          <p class="subtle">Click legend to toggle categories</p>
+        </div>
+        <div class="panel-body">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </article>
+
+      <article class="card panel">
+        <div class="panel-head">
+          <h2>Income vs Spending</h2>
+          <p class="subtle">Month summary snapshot</p>
+        </div>
+        <div class="panel-body">
+          <canvas id="barChart"></canvas>
+        </div>
+      </article>
+
+      <article class="card panel">
+        <div class="panel-head">
+          <h2>Transactions</h2>
+          <div class="panel-actions">
+            <input class="search" id="searchBox" type="search" placeholder="Search transactions..." />
+            <select class="miniSelect" id="categoryFilter">
+              <option value="all" selected>All categories</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="panel-body table-wrap">
+          <table class="table" id="txTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Merchant</th>
+                <th>Category</th>
+                <th class="right">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- rows injected by JS -->
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
